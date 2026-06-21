@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pizzeria Beštek — Biograd na Moru | Pizza iz krušne peći</title>
+<meta name="description" content="Pizzeria Beštek u Biogradu na Moru. Pizza iz krušne peći, domaća tjestenina i jela s roštilja. Pošteno, srdačno, bez kompliciranja. Rezervirajte stol." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#FBFAF6; --ink:#241F1B; --charcoal:#241F1B;
+  --tomato:#D6432B; --tomato-dark:#B5331F;
+  --olive:#5E6B3A; --olive-dark:#48522C;
+  --cream:#F2EEE2; --muted:#6F675E; --line:#E3DCCB;
+  --font-display:'Archivo',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+section{position:relative}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.02;letter-spacing:-.02em}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--tomato)}
+.btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.01em;padding:14px 26px;border-radius:50px;background:var(--tomato);color:#fff;transition:transform .25s ease,background .25s ease}
+.btn:hover{background:var(--tomato-dark);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s ease,box-shadow .35s ease,padding .35s ease;padding:22px 0}
+header.solid{background:rgba(251,250,246,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);padding:14px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:900;font-size:21px;letter-spacing:-.02em;color:var(--ink)}
+.brand .fk{width:26px;height:26px;color:var(--tomato)}
+header:not(.solid) .brand,header:not(.solid) .nav-links a{color:#fff}
+header:not(.solid) .brand .fk{color:#fff}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-weight:600;font-size:15px;color:var(--ink);transition:color .2s}
+.nav-links a:hover{color:var(--tomato)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
+.burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+header:not(.solid) .burger span{background:#fff}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.55) 0%,rgba(20,16,12,.15) 38%,rgba(20,16,12,.78) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding-bottom:8vh;color:#fff}
+.hero h1{font-size:clamp(2.9rem,8.5vw,7.2rem);font-weight:900;color:#fff;text-transform:none}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 em{font-style:normal;color:#FFD27A}
+.hero-tag{max-width:560px;margin-top:22px;font-size:clamp(1.05rem,2vw,1.3rem);color:#F4ECDD;font-weight:400}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.hero .btn.ghost:hover{background:#fff;color:var(--ink)}
+.hero-meta{position:absolute;top:140px;right:28px;z-index:2;text-align:right;color:#fff;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.9}
+
+/* marquee strip */
+.strip{background:var(--tomato);color:#fff;padding:16px 0;overflow:hidden;white-space:nowrap;border-top:3px solid var(--olive)}
+.strip-track{display:inline-flex;gap:48px;font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;animation:scrollx 26s linear infinite;will-change:transform}
+.strip-track span{display:inline-flex;align-items:center;gap:48px}
+.strip svg{width:18px;height:18px;opacity:.85}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* about / manifest */
+.about{padding:120px 0}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
+.about h2{font-size:clamp(2rem,4.5vw,3.6rem);margin:18px 0 26px}
+.about p{color:var(--muted);font-size:1.12rem;margin-bottom:18px}
+.about p strong{color:var(--ink);font-weight:600}
+.about-img{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5}
+.about-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s ease}
+.about-img:hover img{transform:scale(1.06)}
+.cutlery-badge{position:absolute;bottom:-26px;left:-26px;width:120px;height:120px;background:var(--olive);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.cutlery-badge svg{width:54px;height:54px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:46px;border-top:1.5px solid var(--line);padding-top:34px}
+.stat .num{font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,5vw,3.4rem);color:var(--tomato);line-height:1}
+.stat .lbl{font-size:.92rem;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* menu */
+.menu{padding:110px 0;background:var(--cream)}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:18px}
+.menu h2{font-size:clamp(2rem,4.5vw,3.4rem)}
+.menu-cat{margin-top:60px}
+.menu-cat h3{font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--olive-dark);display:flex;align-items:center;gap:14px;margin-bottom:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+.menu-cat h3 svg{width:24px;height:24px;color:var(--tomato)}
+.menu-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 56px}
+.mi{padding:18px 0;border-bottom:1px dashed var(--line)}
+.mi .name{font-family:var(--font-display);font-weight:700;font-size:1.18rem;display:flex;align-items:center;gap:10px}
+.mi .tag{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--tomato);color:#fff;padding:3px 8px;border-radius:20px}
+.mi .desc{color:var(--muted);font-size:.98rem;margin-top:5px}
+
+/* swiper pizze */
+.pizze{padding:110px 0;overflow:hidden}
+.pizze .menu-head{margin-bottom:40px}
+.swiper{overflow:visible}
+.swiper-slide{width:340px;height:auto}
+.pcard{background:#fff;border:1.5px solid var(--line);border-radius:20px;overflow:hidden;height:100%;transition:transform .35s ease,box-shadow .35s ease}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(36,31,27,.12)}
+.pcard-img{aspect-ratio:4/3;overflow:hidden}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.pcard:hover .pcard-img img{transform:scale(1.08)}
+.pcard-body{padding:22px 24px 26px}
+.pcard-body h4{font-family:var(--font-display);font-weight:800;font-size:1.32rem;margin-bottom:8px}
+.pcard-body p{color:var(--muted);font-size:.97rem}
+.swiper-nav{display:flex;gap:12px;margin-top:30px}
+.swiper-nav button{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
+.swiper-nav button:hover{background:var(--ink);color:#fff}
+.swiper-nav svg{width:20px;height:20px}
+
+/* story */
+.story{padding:120px 0;background:var(--charcoal);color:var(--cream)}
+.story-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center}
+.story h2{color:#fff;font-size:clamp(2rem,4.5vw,3.4rem);margin:16px 0 24px}
+.story p{color:#D6CFC2;font-size:1.1rem;margin-bottom:16px}
+.story .eyebrow{color:#FFB27A}
+.story-img{border-radius:18px;overflow:hidden;aspect-ratio:5/4}
+.story-img img{width:100%;height:100%;object-fit:cover}
+
+/* gallery */
+.gallery{padding:110px 0}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+.gal-grid figure{overflow:hidden;border-radius:14px}
+.gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.gal-grid figure:hover img{transform:scale(1.09)}
+.gal-grid .tall{grid-row:span 2}
+.gal-grid .wide{grid-column:span 2}
+
+/* location */
+.loc{padding:110px 0;background:var(--cream)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(36,31,27,.1)}
+.loc-info{background:#fff;padding:56px 50px}
+.loc-info h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:26px}
+.loc-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.loc-row svg{width:22px;height:22px;color:var(--tomato);flex-shrink:0;margin-top:3px}
+.loc-row .k{font-family:var(--font-display);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.loc-row .v{font-size:1.05rem;margin-top:2px}
+.loc-map{min-height:480px}
+.loc-map iframe{width:100%;height:100%;border:0;min-height:480px;filter:saturate(1.05)}
+.hours{margin-top:8px}
+.hours div{display:flex;justify-content:space-between;padding:7px 0;font-size:.98rem;border-bottom:1px dashed var(--line)}
+.hours .d{color:var(--muted)}
+
+/* cta band */
+.band{padding:100px 0;text-align:center;background:var(--tomato);color:#fff}
+.band h2{font-size:clamp(2.2rem,6vw,4.6rem);color:#fff;margin-bottom:18px}
+.band p{font-size:1.15rem;opacity:.92;margin-bottom:30px}
+.band .btn{background:#fff;color:var(--tomato)}
+.band .btn:hover{background:var(--charcoal);color:#fff}
+
+/* footer */
+footer{background:var(--charcoal);color:#CFC8BC;padding:70px 0 36px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot-brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:900;font-size:24px;color:#fff;margin-bottom:16px}
+.foot-brand svg{width:28px;height:28px;color:#FFB27A}
+footer h5{font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+footer a{display:block;padding:5px 0;color:#CFC8BC;transition:color .2s}
+footer a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;font-size:.86rem;color:#8E8779}
+
+[data-reveal]{opacity:0;transform:translateY(34px)}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .about-grid,.story-grid,.loc-grid{grid-template-columns:1fr;gap:40px}
+  .menu-list{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+  .stats{grid-template-columns:1fr 1fr}
+  .loc-map{min-height:360px}
+  .loc-info{padding:40px 30px}
+  .nav-cta .btn.ghost{display:none}
+}
+@media(max-width:540px){
+  .wrap{padding:0 20px}
+  .gal-grid{grid-template-columns:1fr;grid-auto-rows:200px}
+  .gal-grid .wide{grid-column:span 1}
+  .stats{grid-template-columns:1fr}
+  .hero-meta{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  .hero-bg img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="brand">
+      <svg class="fk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v6a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M6 11v10M18 3c-1.5 0-3 1.5-3 4s1 4 3 4v10"/></svg>
+      Beštek
+    </a>
+    <nav class="nav-links">
+      <a href="#about">Priča</a>
+      <a href="#menu">Jelovnik</a>
+      <a href="#pizze">Pizze</a>
+      <a href="#gallery">Galerija</a>
+      <a href="#loc">Kontakt</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+38523367591" class="btn ghost">Naruči</a>
+      <a href="#loc" class="btn">Rezerviraj</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Izbornik"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=2000&q=80" alt="Pizza iz krušne peći" />
+  </div>
+  <div class="hero-meta">Biograd na Moru<br>Restoran &amp; pizzeria</div>
+  <div class="wrap hero-inner">
+    <h1>
+      <span class="ln">Uzmi <em>beštek</em></span>
+      <span class="ln">i navali.</span>
+    </h1>
+    <p class="hero-tag">Pizza iz krušne peći, domaća tjestenina i jela s roštilja — pošteno, srdačno i bez kompliciranja, u srcu Biograda na Moru.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn">Pogledaj jelovnik</a>
+      <a href="#loc" class="btn ghost">Rezerviraj stol</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>Krušna peć&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Domaće tijesto&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Pošteni tanjuri&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Srdačna posluga&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;</span>
+    <span>Krušna peć&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Domaće tijesto&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Pošteni tanjuri&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;Srdačna posluga&nbsp;<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>&nbsp;</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div data-reveal>
+      <span class="eyebrow">Naša priča</span>
+      <h2>Tijesto koje diše, peć koja pamti.</h2>
+      <p>Ime <strong>Beštek</strong> kod nas u Dalmaciji znači pribor za jelo — nož, vilica, žlica. Onaj trenutak kad sjedneš za stol, uzmeš beštek i jednostavno — navališ. Bez fasade, bez izvještačenosti. Samo dobra hrana i dobro društvo.</p>
+      <p>Naše tijesto odmara 48 sati prije nego dotakne <strong>krušnu peć</strong>. Pečemo na drvima, na visokoj temperaturi, tako da korica bude hrskava, a sredina mekana i lagana. Tjesteninu mijesimo doma, a roštilj ide na žar — onako kako se to oduvijek radilo.</p>
+      <p>Beštek je susjedska pizzeria u kojoj se osjećaš kao kod svojih. Dođi gladan, ostani dugo.</p>
+      <div class="stats">
+        <div class="stat"><div class="num" data-count="48">48</div><div class="lbl">sati fermentacije tijesta</div></div>
+        <div class="stat"><div class="num" data-count="24">24</div><div class="lbl">vrste pizza iz peći</div></div>
+        <div class="stat"><div class="num" data-count="100">100</div><div class="lbl">% domaća tjestenina</div></div>
+      </div>
+    </div>
+    <div class="about-img" data-reveal>
+      <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1100&q=80" alt="Pečenje pizze u krušnoj peći" />
+      <div class="cutlery-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v6a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M6 11v10M18 3c-1.5 0-3 1.5-3 4s1 4 3 4v10"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div data-reveal>
+        <span class="eyebrow">Jelovnik</span>
+        <h2>Pošteni tanjuri.</h2>
+      </div>
+      <a href="#loc" class="btn ghost" data-reveal>Rezerviraj stol</a>
+    </div>
+
+    <div class="menu-cat" data-reveal>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Pizze iz krušne peći</h3>
+      <div class="menu-list">
+        <div class="mi"><div class="name">Margherita <span class="tag">Klasik</span></div><div class="desc">San Marzano umak, fior di latte, svježi bosiljak, kap maslinova ulja.</div></div>
+        <div class="mi"><div class="name">Beštek</div><div class="desc">Naša kuća: pršut, rukola, cherry rajčica, grana i hladno tiješteno ulje.</div></div>
+        <div class="mi"><div class="name">Dalmatinka</div><div class="desc">Domaća kobasica, kapula, paprika, kozji sir i origano s Velebita.</div></div>
+        <div class="mi"><div class="name">Quattro formaggi</div><div class="desc">Gorgonzola, grana, dimljeni sir i mozzarella, malo meda i orah.</div></div>
+        <div class="mi"><div class="name">Marina <span class="tag">More</span></div><div class="desc">Plodovi mora, češnjak, peršin i limun — Jadran na tanjuru.</div></div>
+        <div class="mi"><div class="name">Capricciosa</div><div class="desc">Šunka, šampinjoni, artičoke, masline i jaje na žumanjku.</div></div>
+      </div>
+    </div>
+
+    <div class="menu-cat" data-reveal>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg> Domaća tjestenina</h3>
+      <div class="menu-list">
+        <div class="mi"><div class="name">Njoki na dalmatinski</div><div class="desc">Domaći njoki u bogatoj pašticadi koja se krčkala satima.</div></div>
+        <div class="mi"><div class="name">Tagliatelle s plodovima mora</div><div class="desc">Svježa tjestenina, škampi, dagnje, bijelo vino i češnjak.</div></div>
+        <div class="mi"><div class="name">Šporki makaruli</div><div class="desc">Stara biogradska klasika — makaruli u gustom mesnom šugu.</div></div>
+        <div class="mi"><div class="name">Lazanje al forno</div><div class="desc">Slojevi domaće tjestenine, bolonjez i bešamel iz peći.</div></div>
+      </div>
+    </div>
+
+    <div class="menu-cat" data-reveal>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14a7 7 0 0 1 14 0M5 14h14M3 18h18"/></svg> S roštilja &amp; žara</h3>
+      <div class="menu-list">
+        <div class="mi"><div class="name">Miješano meso</div><div class="desc">Ćevapi, ražnjić, pljeskavica i vratina s ajvarom i lukom.</div></div>
+        <div class="mi"><div class="name">Biftek na žaru</div><div class="desc">Zreli biftek s pečenim povrćem i umakom od zelenog papra.</div></div>
+        <div class="mi"><div class="name">Lignje na žaru</div><div class="desc">Svježe lignje, blitva s krumpirom i domaće maslinovo ulje.</div></div>
+        <div class="mi"><div class="name">Pileći ražnjić</div><div class="desc">Marinirana piletina s povrćem i tzatzikijem od domaćeg jogurta.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pizze" id="pizze">
+  <div class="wrap">
+    <div class="menu-head">
+      <div data-reveal>
+        <span class="eyebrow">Iz peći</span>
+        <h2>Naše najtraženije pizze.</h2>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" data-reveal>
+    <div class="swiper" id="pizzaSwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><article class="pcard"><div class="pcard-img"><img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=800&q=80" alt="Margherita"/></div><div class="pcard-body"><h4>Margherita</h4><p>San Marzano, fior di latte i svježi bosiljak. Onaj prvi zalogaj zbog kojeg se vraćaš.</p></div></article></div>
+        <div class="swiper-slide"><article class="pcard"><div class="pcard-img"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80" alt="Beštek pizza"/></div><div class="pcard-body"><h4>Beštek</h4><p>Pršut, rukola, cherry i grana. Naša kuća — onako kako bi je radio susjed koji zna.</p></div></article></div>
+        <div class="swiper-slide"><article class="pcard"><div class="pcard-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Quattro formaggi"/></div><div class="pcard-body"><h4>Quattro formaggi</h4><p>Četiri sira, kap meda i orah. Za one koji vole punu, kremastu koricu.</p></div></article></div>
+        <div class="swiper-slide"><article class="pcard"><div class="pcard-img"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=800&q=80" alt="Marina pizza"/></div><div class="pcard-body"><h4>Marina</h4><p>Plodovi mora, češnjak i limun. Jadran u svakom zalogaju, ravno iz peći.</p></div></article></div>
+        <div class="swiper-slide"><article class="pcard"><div class="pcard-img"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=800&q=80" alt="Capricciosa"/></div><div class="pcard-body"><h4>Capricciosa</h4><p>Šunka, šampinjoni, artičoke i masline. Pun tanjur za pravu glad.</p></div></article></div>
+      </div>
+    </div>
+    <div class="swiper-nav">
+      <button id="pprev" aria-label="Prethodno"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button id="pnext" aria-label="Sljedeće"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap story-grid">
+    <div class="story-img" data-reveal>
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1100&q=80" alt="Topla unutrašnjost pizzerije" />
+    </div>
+    <div data-reveal>
+      <span class="eyebrow">Naš kutak</span>
+      <h2>Mjesto gdje more, marina i miris peći žive zajedno.</h2>
+      <p>Biograd na Moru je grad obitelji, marine i mora. Mi smo onaj kutak u koji se svrati nakon kupanja, prošetajući uz rivu, ili kad jednostavno nema volje za kuhanjem.</p>
+      <p>Ovdje ne glumimo ništa. Stol je pun, vino je domaće, a posluga te zna po imenu već drugi put kad dođeš. To je Beštek — pizzeria u koju se vraćaš jer se osjećaš kao kod svojih.</p>
+      <a href="#loc" class="btn">Dođi na tanjur</a>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="menu-head">
+      <div data-reveal><span class="eyebrow">Galerija</span><h2>Što se nađe na stolu.</h2></div>
+    </div>
+    <div class="gal-grid" data-reveal>
+      <figure class="tall"><img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&w=800&q=80" alt="Pizza"/></figure>
+      <figure class="wide"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=1000&q=80" alt="Roštilj"/></figure>
+      <figure><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=80" alt="Tjestenina"/></figure>
+      <figure><img src="https://images.unsplash.com/photo-1481931098730-318b6f776db0?auto=format&fit=crop&w=700&q=80" alt="Detalj jela"/></figure>
+      <figure class="wide"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=80" alt="Interijer"/></figure>
+      <figure><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=700&q=80" alt="Detalj"/></figure>
+    </div>
+  </div>
+</section>
+
+<section class="loc" id="loc">
+  <div class="wrap">
+    <div class="menu-head" style="margin-bottom:34px"><div data-reveal><span class="eyebrow">Kontakt &amp; lokacija</span><h2 style="font-size:clamp(2rem,4.5vw,3.4rem)">Nađi nas, rezerviraj stol.</h2></div></div>
+    <div class="loc-grid" data-reveal>
+      <div class="loc-info">
+        <h2>Pizzeria Beštek</h2>
+        <div class="loc-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="k">Adresa</div><div class="v">Biograd na Moru, Zadarska županija</div></div></div>
+        <div class="loc-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><div><div class="k">Telefon</div><div class="v"><a href="tel:+38523367591" style="color:var(--tomato);font-weight:600">+385 23 367 591</a></div></div></div>
+        <div class="loc-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="width:100%"><div class="k">Radno vrijeme</div>
+          <div class="hours">
+            <div><span class="d">Ponedjeljak – Četvrtak</span><span>11:00 – 23:00</span></div>
+            <div><span class="d">Petak – Subota</span><span>11:00 – 24:00</span></div>
+            <div><span class="d">Nedjelja</span><span>12:00 – 23:00</span></div>
+          </div>
+        </div></div>
+        <a href="tel:+38523367591" class="btn" style="margin-top:26px">Nazovi i rezerviraj</a>
+      </div>
+      <div class="loc-map">
+        <iframe src="https://maps.google.com/maps?q=Pizzeria+Bestek+Biograd+na+Moru&output=embed" loading="lazy" title="Karta — Pizzeria Beštek Biograd na Moru" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Uzmi beštek.</h2>
+    <p>Stol te čeka. Pizza je u peći.</p>
+    <a href="tel:+38523367591" class="btn">Rezerviraj &nbsp;+385 23 367 591</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v6a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M6 11v10M18 3c-1.5 0-3 1.5-3 4s1 4 3 4v10"/></svg> Beštek</div>
+        <p style="max-width:320px;color:#A89F90">Pizza iz krušne peći, domaća tjestenina i jela s roštilja. Pošteno i srdačno — u Biogradu na Moru.</p>
+      </div>
+      <div>
+        <h5>Stranica</h5>
+        <a href="#about">Priča</a>
+        <a href="#menu">Jelovnik</a>
+        <a href="#pizze">Pizze</a>
+        <a href="#gallery">Galerija</a>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <a href="tel:+38523367591">+385 23 367 591</a>
+        <a href="#loc">Biograd na Moru</a>
+        <a href="#loc">Radno vrijeme</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pizzeria Beštek — Biograd na Moru</span>
+      <span>Uzmi beštek i navali.</span>
+    </div>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* header solid */
+const hdr=document.getElementById('hdr');
+const onScroll=()=>{hdr.classList.toggle('solid',window.scrollY>60)};
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+/* mobile burger -> simple anchor scroll (links visible via jump) */
+document.getElementById('burger').addEventListener('click',()=>{
+  document.getElementById('loc').scrollIntoView({behavior:'smooth'});
+});
+
+/* Swiper */
+const sw=new Swiper('#pizzaSwiper',{slidesPerView:'auto',spaceBetween:22,grabCursor:true,
+  navigation:{nextEl:'#pnext',prevEl:'#pprev'}});
+
+if(!reduced){
+  /* Lenis */
+  const lenis=new Lenis({lerp:0.1,smoothWheel:true});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+
+  /* hero load */
+  gsap.set('.hero-bg img',{scale:1.18});
+  const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.to('.hero-bg img',{scale:1.05,duration:1.6})
+    .from('.hero h1 .ln',{yPercent:115,duration:.9,stagger:.12},'-=1.3')
+    .from('.hero-tag',{y:24,opacity:0,duration:.7},'-=.5')
+    .from('.hero-cta',{y:20,opacity:0,duration:.6},'-=.4')
+    .from('.hero-meta',{opacity:0,duration:.8},'-=.6');
+
+  /* reveals */
+  gsap.utils.toArray('[data-reveal]').forEach(el=>{
+    gsap.to(el,{opacity:1,y:0,duration:.9,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 86%'}});
+  });
+
+  /* count up */
+  gsap.utils.toArray('[data-count]').forEach(el=>{
+    const end=+el.dataset.count;
+    ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>{
+      gsap.fromTo(el,{innerText:0},{innerText:end,duration:1.6,ease:'power2.out',snap:{innerText:1},
+        onUpdate(){el.innerText=Math.round(el.innerText)}});
+    }});
+  });
+}else{
+  document.querySelectorAll('[data-reveal]').forEach(e=>{e.style.opacity=1;e.style.transform='none'});
+}
+</script>
+</body>
+</html>
